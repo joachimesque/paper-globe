@@ -71,129 +71,124 @@ def get_stripes(file, projection):
 
     iterator = 0
 
-    while True:
-        try:
-            col = iterator % COLS_NUMBER
-            row = math.floor(iterator / COLS_NUMBER)
+    for iterator in range(COLS_NUMBER * ROWS_NUMBER):
+        col = iterator % COLS_NUMBER
+        row = math.floor(iterator / COLS_NUMBER)
 
-            pos_x_start = tile_width * col
-            pos_x_end = tile_width * (col + 1)
-            pos_y_start = math.floor(sum(projection_heights[:row]))
-            pos_y_end = math.floor(sum(projection_heights[: row + 1]))
+        pos_x_start = tile_width * col
+        pos_x_end = tile_width * (col + 1)
+        pos_y_start = math.floor(sum(projection_heights[:row]))
+        pos_y_end = math.floor(sum(projection_heights[: row + 1]))
 
-            with original_image[pos_x_start:pos_x_end, pos_y_start:pos_y_end] as chunk:
-                chunk.virtual_pixel = "transparent"
-                chunk.interpolate = "spline"
+        chunk = original_image[pos_x_start:pos_x_end, pos_y_start:pos_y_end]
+        chunk.virtual_pixel = "transparent"
+        chunk.interpolate = "spline"
 
-                chunk.sample(tile_width, row_heights[row])
+        chunk.sample(tile_width, row_heights[row])
 
-                if row == 0:
-                    chunk.distort(
-                        "bilinear_forward",
-                        (
-                            0,
-                            0,
-                            tile_width / 2,
-                            0,
-                            tile_width,
-                            0,
-                            tile_width / 2 + 1,
-                            0,
-                            tile_width,
-                            row_heights[row],
-                            tile_width - halfway_padding,
-                            row_heights[row],
-                            0,
-                            row_heights[row],
-                            halfway_padding,
-                            row_heights[row],
-                        ),
-                        best_fit=True,
-                    )
-                elif row == 1:
-                    chunk.distort(
-                        "bilinear_forward",
-                        (
-                            0,
-                            0,
-                            halfway_padding,
-                            0,
-                            tile_width,
-                            0,
-                            tile_width - halfway_padding,
-                            0,
-                            tile_width,
-                            row_heights[row],
-                            tile_width,
-                            row_heights[row],
-                            0,
-                            row_heights[row],
-                            0,
-                            row_heights[row],
-                        ),
-                        best_fit=True,
-                    )
+        if row == 0:
+            chunk.distort(
+                "bilinear_forward",
+                (
+                    0,
+                    0,
+                    tile_width / 2,
+                    0,
+                    tile_width,
+                    0,
+                    tile_width / 2 + 1,
+                    0,
+                    tile_width,
+                    row_heights[row],
+                    tile_width - halfway_padding,
+                    row_heights[row],
+                    0,
+                    row_heights[row],
+                    halfway_padding,
+                    row_heights[row],
+                ),
+                best_fit=True,
+            )
+        elif row == 1:
+            chunk.distort(
+                "bilinear_forward",
+                (
+                    0,
+                    0,
+                    halfway_padding,
+                    0,
+                    tile_width,
+                    0,
+                    tile_width - halfway_padding,
+                    0,
+                    tile_width,
+                    row_heights[row],
+                    tile_width,
+                    row_heights[row],
+                    0,
+                    row_heights[row],
+                    0,
+                    row_heights[row],
+                ),
+                best_fit=True,
+            )
 
-                elif row == 2:
-                    chunk.distort(
-                        "bilinear_forward",
-                        (
-                            0,
-                            0,
-                            0,
-                            0,
-                            tile_width,
-                            0,
-                            tile_width,
-                            0,
-                            tile_width,
-                            row_heights[row],
-                            tile_width - halfway_padding,
-                            row_heights[row],
-                            0,
-                            row_heights[row],
-                            halfway_padding,
-                            row_heights[row],
-                        ),
-                        best_fit=True,
-                    )
-                elif row == 3:
-                    chunk.distort(
-                        "bilinear_forward",
-                        (
-                            0,
-                            0,
-                            halfway_padding,
-                            0,
-                            tile_width,
-                            0,
-                            tile_width - halfway_padding,
-                            0,
-                            tile_width,
-                            row_heights[row],
-                            tile_width / 2 + 1,
-                            row_heights[row],
-                            0,
-                            row_heights[row],
-                            tile_width / 2,
-                            row_heights[row],
-                        ),
-                        best_fit=True,
-                    )
+        elif row == 2:
+            chunk.distort(
+                "bilinear_forward",
+                (
+                    0,
+                    0,
+                    0,
+                    0,
+                    tile_width,
+                    0,
+                    tile_width,
+                    0,
+                    tile_width,
+                    row_heights[row],
+                    tile_width - halfway_padding,
+                    row_heights[row],
+                    0,
+                    row_heights[row],
+                    halfway_padding,
+                    row_heights[row],
+                ),
+                best_fit=True,
+            )
+        elif row == 3:
+            chunk.distort(
+                "bilinear_forward",
+                (
+                    0,
+                    0,
+                    halfway_padding,
+                    0,
+                    tile_width,
+                    0,
+                    tile_width - halfway_padding,
+                    0,
+                    tile_width,
+                    row_heights[row],
+                    tile_width / 2 + 1,
+                    row_heights[row],
+                    0,
+                    row_heights[row],
+                    tile_width / 2,
+                    row_heights[row],
+                ),
+                best_fit=True,
+            )
 
-                with Drawing() as draw:
-                    draw.composite(
-                        operator="replace",
-                        left=0,
-                        top=sum(row_heights[:row]),
-                        width=chunk.width,
-                        height=chunk.height,
-                        image=chunk,
-                    )
-                    draw(stripes[col])
-
-                iterator += 1
-        except IndexError:
-            break
+        with Drawing() as draw:
+            draw.composite(
+                operator="replace",
+                left=0,
+                top=sum(row_heights[:row]),
+                width=chunk.width,
+                height=chunk.height,
+                image=chunk,
+            )
+            draw(stripes[col])
 
     return stripes
