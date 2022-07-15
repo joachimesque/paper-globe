@@ -4,6 +4,8 @@ PaperGlobe is a Python utility that will transform an image of the Earth to a te
 
 Of course you’re not limited to the Earth, you can use any other planet or quasi-spherical object as a source, as long as its surface is projected in the correct way. The image of the planet must be a cylindrical projection. Right now it works with [Equirectangular](https://en.wikipedia.org/wiki/Equirectangular_projection), [Mercator](https://en.wikipedia.org/wiki/Mercator_projection) or [Gall stereographic](https://en.wikipedia.org/wiki/Gall_stereographic_projection) projections. PaperGlobe could work with any other projection, but the results won’t make you happy.
 
+![](https://repository-images.githubusercontent.com/513955992/0b1beb9c-7e3d-4535-8feb-ba6dadaff4f8)
+
 ## Using PaperGlobe
 
 ### Installation
