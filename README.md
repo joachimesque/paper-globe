@@ -12,14 +12,12 @@ Of course you’re not limited to the Earth, you can use any other planet or qua
 
 PaperGlobe is neatly served as a Python module.
 
-First off, you have to have **Python 3** installed on your machine. Then you have to download or clone the contents of this repository.
-
-Then, these three commands will setup the script:
+First off, you have to have **Python 3** installed on your machine. Then, these three commands will setup the script:
 
 ```shell
 python3 -m venv venv
 source venv/bin/activate
-pip install .
+pip install https://github.com/joachimesque/paper-globe/archive/refs/tags/v0.0.2.zip
 ```
 
 The script can then be run with:
@@ -55,7 +53,7 @@ This option lets you choose between two paper sizes for printing the template:
 
 ### Code
 
-After cloning the repo, you can set it up in much the same way as when you want to use it:
+After cloning the repo on your machine, you have to set it up:
 
 ```shell
 python3 -m virtualenv venv
