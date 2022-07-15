@@ -30,7 +30,7 @@ class PaperGlobe:
         bold : function, optional
             function to be executed to style some texts inside the status message
         """
-        
+
         self.status = (None, "")
         self.on_update = on_update
         self.bold = bold
