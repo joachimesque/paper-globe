@@ -20,6 +20,12 @@ source venv/bin/activate
 pip install https://github.com/joachimesque/paper-globe/archive/refs/tags/v0.0.2.zip
 ```
 
+Once the script is installed in the virtual environement, you need an [image](https://github.com/joachimesque/paper-globe/raw/main/earth.jpg).
+
+```shell
+wget https://github.com/joachimesque/paper-globe/raw/main/earth.jpg
+```
+
 The script can then be run with:
 
 ```shell
