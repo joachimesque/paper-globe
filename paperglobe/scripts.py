@@ -30,9 +30,9 @@ def cli(file, projection, print_size):
 
     \b
     <projection> can be:
-      • equirectangular
-      • mercator
-      • gall-stereo (for a Gall Stereographic projection)
+      - equirectangular
+      - mercator
+      - gall-stereo (for a Gall Stereographic projection)
     """
 
     def echo_status(status_type, message):

@@ -7,7 +7,22 @@ from paperglobe import format_output_filename, PRINT_SIZES
 
 
 def write_pdf(file, stripes, print_size):
-    """Grabs the stripes and inserts each one at its right place in the PDF"""
+    """Place the stripe Image objects onto the PDF
+
+    If will take a list of stripes and inserts each one at its right position
+    on the right page of the right PDF template file
+
+    Parameters
+    ----------
+    file : str
+        path of the image file to be used to generate the template
+    stripes : list
+        a list of Image objects
+    print_size : str
+        printing size of the template. one of:
+            - "a4"
+            - "us-letter"
+    """
 
     output_filename = format_output_filename(file, print_size)
     pdf_path = os.path.join(

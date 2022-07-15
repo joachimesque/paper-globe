@@ -32,7 +32,23 @@ PROJECTIONS_RATIOS = {
 
 
 def get_stripes(file, projection):
-    """Generates a stripes array from an image and a projection type"""
+    """Generates a stripes array from an image and a projection type
+
+    Parameters
+    ----------
+    file : str
+        path of the image file to be used to generate the template
+    projection : str
+        type of projection. one of:
+            - "equirectangular"
+            - "mercator"
+            - "gall-stereo"
+
+    Returns
+    -------
+    list
+        a list of vertical Image objects
+    """
 
     original_image = Image(filename=file, resolution=450)
 

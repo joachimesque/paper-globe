@@ -2,6 +2,23 @@ from pathlib import Path
 
 
 def format_output_filename(file, print_size):
-    """Returns the name of the output file"""
+    """Returns the name of the output file
 
-    return f"{Path(file).stem}_{print_size}.pdf"
+    Parameters
+    ----------
+    file : str
+        path of the image file to be used to generate the template
+    print_size : str
+        printing size of the template. one of:
+            - "a4"
+            - "us-letter"
+
+    Returns
+    -------
+    string
+        the name of the destination file
+    """
+
+    filename = Path(file).stem[:40]
+
+    return f"paperglobe_{filename}_{print_size}.pdf"
