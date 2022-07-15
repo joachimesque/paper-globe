@@ -1,9 +1,9 @@
 import click
 from paperglobe import (
-    generate_paperglobe,
+    PaperGlobe,
     PROJECTIONS,
     PRINT_SIZES,
-    format_output_filename,
+    STATUS_TYPES,
 )
 
 
@@ -35,14 +35,13 @@ def cli(file, projection, print_size):
       • gall-stereo (for a Gall Stereographic projection)
     """
 
-    click.echo(
-        f"{click.style(file, bold=True)} has been found, starting conversion. 🧑‍🚀🪄 🗺"
-    )
+    def echo_status(status_type, message):
+        if status_type == STATUS_TYPES["ERROR"]:
+            click.echo(f"{click.style('Error', bold=True, fg='red')}: ", nl=False)
+        click.echo(message)
 
-    generation_status = generate_paperglobe(file, projection, print_size)
+    def bold(text):
+        return click.style(text, bold=True)
 
-    if generation_status:
-        filename = click.style(format_output_filename(file, print_size), bold=True)
-        click.echo(f"The file {filename} has been saved. 🧑‍🚀 ✨🌏🌍🌎✨")
-    else:
-        click.echo("An error has occured.")
+    pg = PaperGlobe(on_update=echo_status, bold=bold)
+    pg.generate_paperglobe(file, projection, print_size)

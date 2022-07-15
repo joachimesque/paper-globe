@@ -14,10 +14,7 @@ def write_pdf(file, stripes, print_size):
         os.path.dirname(__file__), f"assets/template-{print_size}.pdf"
     )
 
-    try:
-        pdf = fitz.open(pdf_path)
-    except:
-        return False
+    pdf = fitz.open(pdf_path)
 
     for index, stripe in enumerate(stripes):
         stripe.transform_colorspace("cmyk")
@@ -50,8 +47,4 @@ def write_pdf(file, stripes, print_size):
 
         page.insert_image(rect, stream=stripe_blob)
 
-    try:
-        pdf.save(output_filename)
-        return True
-    except:
-        return False
+    pdf.save(output_filename)
