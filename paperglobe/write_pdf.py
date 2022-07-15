@@ -3,10 +3,10 @@ import os
 
 from fitz import fitz
 
-from paperglobe import format_output_filename, PRINT_SIZES
+from paperglobe import PRINT_SIZES
 
 
-def write_pdf(file, stripes, print_size):
+def write_pdf(stripes, print_size, out_path):
     """Place the stripe Image objects onto the PDF
 
     If will take a list of stripes and inserts each one at its right position
@@ -14,17 +14,16 @@ def write_pdf(file, stripes, print_size):
 
     Parameters
     ----------
-    file : str
-        path of the image file to be used to generate the template
     stripes : list
         a list of Image objects
     print_size : str
         printing size of the template. one of:
             - "a4"
             - "us-letter"
+    out_path : str
+        path of the output file
     """
 
-    output_filename = format_output_filename(file, print_size)
     pdf_path = os.path.join(
         os.path.dirname(__file__), f"assets/template-{print_size}.pdf"
     )
@@ -62,4 +61,4 @@ def write_pdf(file, stripes, print_size):
 
         page.insert_image(rect, stream=stripe_blob)
 
-    pdf.save(output_filename)
+    pdf.save(out_path)

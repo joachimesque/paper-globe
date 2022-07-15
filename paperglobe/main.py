@@ -1,3 +1,5 @@
+import os
+
 from paperglobe import get_stripes, write_pdf, STATUS_TYPES, format_output_filename
 
 
@@ -53,7 +55,7 @@ class PaperGlobe:
         if callable(self.on_update):
             self.on_update(status_type, message)
 
-    def generate_paperglobe(self, file, projection, print_size):
+    def generate_paperglobe(self, file, projection, print_size, out_path):
         """Runs the paper globe template generation and calls status updates
 
         Parameters
@@ -69,6 +71,11 @@ class PaperGlobe:
             printing size of the template. one of:
                 - "a4"
                 - "us-letter"
+
+        Returns
+        -------
+        tuple : (str, bool)
+            full path of the output file, boolean value of the file existence
         """
 
         self.update_status(
@@ -76,17 +83,21 @@ class PaperGlobe:
             f"{self.bold(file)} has been found, starting conversion. 🧑‍🚀🪄 🗺",
         )
 
+        filename = format_output_filename(file, print_size)
+        out_path = os.path.join(os.path.dirname(out_path), filename)
+
         try:
             stripes = get_stripes(file, projection)
-            write_pdf(file, stripes, print_size)
+            write_pdf(stripes, print_size, out_path)
         except Exception as ex:
             self.update_status(
                 STATUS_TYPES["ERROR"],
                 f"The file couldn’t be written ({self.bold(type(ex).__name__)})",
             )
         else:
-            filename = format_output_filename(file, print_size)
             self.update_status(
                 STATUS_TYPES["INFO"],
                 f"The file {self.bold(filename)} has been saved 🧑‍🚀 ✨🌏🌍🌎✨",
             )
+
+        return (os.path.abspath(out_path), os.path.exists(out_path))

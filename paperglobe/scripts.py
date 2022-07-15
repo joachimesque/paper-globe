@@ -8,7 +8,8 @@ from paperglobe import (
 
 
 @click.command()
-@click.argument("file", type=click.Path(exists=True), metavar="<file>")
+@click.argument("file", type=click.Path(exists=True, file_okay=True), metavar="<file>")
+@click.argument("out_path", type=click.Path(), default="", metavar="<output_path>")
 @click.option(
     "-p",
     "--projection",
@@ -25,7 +26,7 @@ from paperglobe import (
     type=click.Choice([PRINT_SIZES[i] for i in PRINT_SIZES]),
 )
 @click.version_option()
-def cli(file, projection, print_size):
+def cli(file, projection, print_size, out_path):
     """Generate a Paper Globe template from a cylindrical projection map. 🗺
 
     \b
@@ -44,4 +45,4 @@ def cli(file, projection, print_size):
         return click.style(text, bold=True)
 
     pg = PaperGlobe(on_update=echo_status, bold=bold)
-    pg.generate_paperglobe(file, projection, print_size)
+    pg.generate_paperglobe(file, projection, print_size, out_path)
