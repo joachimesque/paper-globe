@@ -15,7 +15,7 @@ First off, you have to have **Python 3** installed on your machine. Then you hav
 Then, these three commands will setup the script:
 
 ```shell
-python3 -m virtualenv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install .
 ```
