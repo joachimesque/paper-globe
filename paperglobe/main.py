@@ -83,7 +83,7 @@ class PaperGlobe:
 
         self.update_status(
             STATUS_TYPES["WAIT"],
-            f"{self.bold(original_filename)} has been found, starting conversion. 🧑‍🚀🪄 🗺",
+            f"{self.bold(original_filename)} has been found, starting transmogrification. 🧑‍🚀🪄 🗺",
         )
 
         try:
@@ -97,7 +97,7 @@ class PaperGlobe:
         else:
             self.update_status(
                 STATUS_TYPES["SUCCESS"],
-                f"The file {self.bold(output_filename)} has been saved 🧑‍🚀 ✨🌏🌍🌎✨",
+                f"The file {self.bold(output_filename)} has been transmogrified 🧑‍🚀 ✨🌏🌍🌎✨",
             )
 
         return (os.path.abspath(out_path), output_filename)
