@@ -79,8 +79,8 @@ class PaperGlobe:
         """
 
         self.update_status(
-            STATUS_TYPES["INFO"],
             f"{self.bold(file)} has been found, starting conversion. 🧑‍🚀🪄 🗺",
+            STATUS_TYPES["WAIT"],
         )
 
         filename = format_output_filename(file, print_size)
@@ -96,8 +96,8 @@ class PaperGlobe:
             )
         else:
             self.update_status(
-                STATUS_TYPES["INFO"],
                 f"The file {self.bold(filename)} has been saved 🧑‍🚀 ✨🌏🌍🌎✨",
+                STATUS_TYPES["SUCCESS"],
             )
 
         return (os.path.abspath(out_path), os.path.exists(out_path))

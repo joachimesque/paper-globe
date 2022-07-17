@@ -5,8 +5,8 @@ PROJECTIONS = {
 }
 STATUS_TYPES = {
     "ERROR": "error",
-    "INFO": "info",
-    "WARNING": "warning",
+    "SUCCESS": "success",
+    "WAIT": "wait",
 }
 PRINT_SIZES = {"A4": "a4", "US_LETTER": "us-letter"}
 
