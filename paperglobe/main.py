@@ -74,17 +74,17 @@ class PaperGlobe:
 
         Returns
         -------
-        tuple : (str, bool)
-            full path of the output file, boolean value of the file existence
+        tuple : (str, str)
+            full path of the output file, filename of the output file
         """
 
-        self.update_status(
-            f"{self.bold(file)} has been found, starting conversion. 🧑‍🚀🪄 🗺",
-            STATUS_TYPES["WAIT"],
-        )
+        output_filename, original_filename = format_output_filename(file, print_size)
+        out_path = os.path.join(os.path.dirname(out_path), output_filename)
 
-        filename = format_output_filename(file, print_size)
-        out_path = os.path.join(os.path.dirname(out_path), filename)
+        self.update_status(
+            STATUS_TYPES["WAIT"],
+            f"{self.bold(original_filename)} has been found, starting conversion. 🧑‍🚀🪄 🗺",
+        )
 
         try:
             stripes = get_stripes(file, projection)
@@ -96,8 +96,8 @@ class PaperGlobe:
             )
         else:
             self.update_status(
-                f"The file {self.bold(filename)} has been saved 🧑‍🚀 ✨🌏🌍🌎✨",
                 STATUS_TYPES["SUCCESS"],
+                f"The file {self.bold(output_filename)} has been saved 🧑‍🚀 ✨🌏🌍🌎✨",
             )
 
-        return (os.path.abspath(out_path), os.path.exists(out_path))
+        return (os.path.abspath(out_path), output_filename)

@@ -15,10 +15,11 @@ def format_output_filename(file, print_size):
 
     Returns
     -------
-    string
-        the name of the destination file
+    tuple : (str, str)
+        the name of the destination file, the original name of the file
     """
 
     filename = Path(file).stem[:40]
+    original_filename = Path(file).name
 
-    return f"paperglobe_{filename}_{print_size}.pdf"
+    return (f"paperglobe_{filename}_{print_size}.pdf", original_filename)
