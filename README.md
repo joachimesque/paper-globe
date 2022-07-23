@@ -2,7 +2,9 @@
 
 PaperGlobe is a Python utility that will transform an image of the Earth to a template that you can cut and assemble by yourself.
 
-Of course you’re not limited to the Earth, you can use any other planet or quasi-spherical object as a source, as long as its surface is projected in the correct way. The image of the planet must be a cylindrical projection. Right now it works with [Equirectangular](https://en.wikipedia.org/wiki/Equirectangular_projection), [Mercator](https://en.wikipedia.org/wiki/Mercator_projection) or [Gall stereographic](https://en.wikipedia.org/wiki/Gall_stereographic_projection) projections. PaperGlobe could work with any other projection, but the results won’t make you happy.
+If you’re unsure about command-line apps or Python, please visit **[paperglo.be](https://paperglo.be)**, where you can generate images online.
+
+Of course you’re not limited to the Earth, you can use any other planet or quasi-spherical object as a source, as long as its surface is projected in the correct way. The image of the planet must be a cylindrical projection. Right now it works with [Equirectangular](https://en.wikipedia.org/wiki/Equirectangular_projection), [Mercator](https://en.wikipedia.org/wiki/Mercator_projection) or [Gall stereographic](https://en.wikipedia.org/wiki/Gall_stereographic_projection) projections. PaperGlobe could work with any other projection, but the results won’t make you so happy.
 
 ![](https://repository-images.githubusercontent.com/513955992/0b1beb9c-7e3d-4535-8feb-ba6dadaff4f8)
 
@@ -79,7 +81,7 @@ I ([@joachimesque](github.com/joachimesque)) created the templates in 2012, insp
 
 The template source files (`*.afdesign`) are shared under a [CC By-NC-SA license](https://creativecommons.org/licenses/by-nc/4.0/).
 
-**Important**: a template generated through this tool can not be used for commercial purposes. If you want to use this tool, or templates generated through this tool for educative/academic purposes, you are most welcome to do it. The template is absolutely free to use, and should always stay free.
+**Important**: a template generated through this tool **can not be used for commercial purposes**. If you want to use this tool, or templates generated through this tool for educative/academic purposes, you are most welcome to do it. The template is absolutely free to use, and should always stay free.
 
 As mentioned on the templates, GeoGrafia’s globes are cheap and neat, you should really consider buying one if available.
 
