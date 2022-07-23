@@ -83,7 +83,7 @@ class PaperGlobe:
 
         self.update_status(
             STATUS_TYPES["WAIT"],
-            f"{self.bold(original_filename)} has been found, starting transmogrification. 🧑‍🚀🪄 🗺",
+            f"{self.bold(original_filename)} has been found, starting transmogrification 🧑‍🚀🪄 🗺",
         )
 
         try:
