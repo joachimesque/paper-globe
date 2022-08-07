@@ -1,9 +1,11 @@
+"""Exports a list of stripes to PDF"""
+
 import math
 import os
 
 from fitz import fitz
 
-from paperglobe import PRINT_SIZES
+from paperglobe.config import PRINT_SIZES
 
 
 def write_pdf(stripes, print_size, out_path):
@@ -36,10 +38,9 @@ def write_pdf(stripes, print_size, out_path):
         stripe_blob = stripe.make_blob("png")
         page = pdf[math.floor(index / 2)]
 
-        """On each page, two stripes are displayed.
-           Both share the same `y` coordinates but have different `x` coordinates.
-           The stripes are x-positioned by their center point.
-        """
+        # On each page, two stripes are displayed.
+        # Both share the same `y` coordinates but have different `x` coordinates.
+        # The stripes are x-positioned by their center point.
         positions = {
             PRINT_SIZES["A4"]: {
                 "x": (

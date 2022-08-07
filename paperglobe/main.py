@@ -1,6 +1,11 @@
+"""Main class for the PaperGlobe module"""
+
 import os
 
-from paperglobe import get_stripes, write_pdf, STATUS_TYPES, format_output_filename
+from paperglobe.config import STATUS_TYPES
+from paperglobe.utils import format_output_filename
+from paperglobe.get_stripes import get_stripes
+from paperglobe.write_pdf import write_pdf
 
 
 class PaperGlobe:
@@ -89,7 +94,7 @@ class PaperGlobe:
         try:
             stripes = get_stripes(file, projection)
             write_pdf(stripes, print_size, out_path)
-        except Exception as ex:
+        except Exception as ex:  # pylint: disable=broad-except
             self.update_status(
                 STATUS_TYPES["ERROR"],
                 f"The file couldn’t be written ({self.bold(type(ex).__name__)})",

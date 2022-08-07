@@ -1,8 +1,11 @@
+"""CLI scripts"""
+
 import click
+
 from paperglobe import (
     PaperGlobe,
-    PROJECTIONS,
     PRINT_SIZES,
+    PROJECTIONS,
     STATUS_TYPES,
 )
 
@@ -16,14 +19,14 @@ from paperglobe import (
     default=PROJECTIONS["EQUIRECTANGULAR"],
     metavar="<projection>",
     help="The map projection on your input image.",
-    type=click.Choice([PROJECTIONS[i] for i in PROJECTIONS]),
+    type=click.Choice(PROJECTIONS.values()),
 )
 @click.option(
     "-s",
     "--print-size",
     default=PRINT_SIZES["A4"],
-    help=f"PDF print size.",
-    type=click.Choice([PRINT_SIZES[i] for i in PRINT_SIZES]),
+    help="PDF print size.",
+    type=click.Choice(PRINT_SIZES.values()),
 )
 @click.version_option()
 def cli(file, projection, print_size, out_path):
@@ -44,5 +47,5 @@ def cli(file, projection, print_size, out_path):
     def bold(text):
         return click.style(text, bold=True)
 
-    pg = PaperGlobe(on_update=echo_status, bold=bold)
-    pg.generate_paperglobe(file, projection, print_size, out_path)
+    pg_export = PaperGlobe(on_update=echo_status, bold=bold)
+    pg_export.generate_paperglobe(file, projection, print_size, out_path)

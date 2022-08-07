@@ -1,10 +1,12 @@
+"""Generates a list of stripes from an image"""
+
 import math
 
 from wand.color import Color
 from wand.image import Image
 from wand.drawing import Drawing
 
-from paperglobe import PROJECTIONS
+from paperglobe.config import PROJECTIONS
 
 COLS_NUMBER = 8
 ROWS_NUMBER = 4
@@ -30,7 +32,7 @@ PROJECTIONS_RATIOS = {
     ],
 }
 
-
+# pylint: disable=too-many-locals,too-many-statements
 def get_stripes(file, projection):
     """Generates a stripes array from an image and a projection type
 
@@ -48,6 +50,10 @@ def get_stripes(file, projection):
     -------
     list
         a list of vertical Image objects
+
+    TODO
+    ----
+    - refactor to get rid of the pylint warning
     """
 
     if file.endswith(".svg"):
@@ -60,7 +66,6 @@ def get_stripes(file, projection):
     wing_width = math.floor(tile_width * 0.066)
 
     stripe_width = tile_width + (2 * wing_width)
-    tile_height = math.floor(original_image.height / ROWS_NUMBER)
 
     row_height_ratios = [0.935, 0.988, 0.988, 0.935]
     row_heights = [math.floor(tile_width * i) for i in row_height_ratios]
@@ -89,8 +94,6 @@ def get_stripes(file, projection):
         -8.28,
         -19.51,
     ]
-
-    iterator = 0
 
     for iterator in range(COLS_NUMBER * ROWS_NUMBER):
         col = iterator % COLS_NUMBER
