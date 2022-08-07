@@ -32,19 +32,27 @@ def write_pdf(stripes, print_size, out_path):
 
     for index, stripe in enumerate(stripes):
         stripe.transform_colorspace("cmyk")
+        stripe_half_width = stripe.width / 2
         stripe_blob = stripe.make_blob("png")
         page = pdf[math.floor(index / 2)]
 
         """On each page, two stripes are displayed.
            Both share the same `y` coordinates but have different `x` coordinates.
+           The stripes are x-positioned by their center point.
         """
         positions = {
             PRINT_SIZES["A4"]: {
-                "x": ((66.5, 251.2), (343.8, 528.5)),
+                "x": (
+                    (158.9 - stripe_half_width, 158.9 + stripe_half_width),
+                    (436.2 - stripe_half_width, 436.2 + stripe_half_width),
+                ),
                 "y": (65.5, 776.4),
             },
             PRINT_SIZES["US_LETTER"]: {
-                "x": ((74.8, 259.5), (352.2, 536.9)),
+                "x": (
+                    (167.2 - stripe_half_width, 167.2 + stripe_half_width),
+                    (444.6 - stripe_half_width, 444.6 + stripe_half_width),
+                ),
                 "y": (40.5, 751.5),
             },
         }
