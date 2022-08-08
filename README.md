@@ -19,7 +19,7 @@ First off, you have to have **Python 3** installed on your machine. Then, these 
 ```shell
 python3 -m venv venv
 source venv/bin/activate
-pip install https://github.com/joachimesque/paper-globe/archive/refs/tags/v0.1.0.zip
+pip install https://github.com/joachimesque/paper-globe/archive/refs/tags/v0.1.1.zip
 ```
 
 Once the script is installed in the virtual environement, you need an [image](https://github.com/joachimesque/paper-globe/raw/main/earth.jpg).
