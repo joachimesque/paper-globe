@@ -7,6 +7,8 @@ from fitz import fitz
 
 from paperglobe.config import PRINT_SIZES
 
+PDF_STRIPE_HEIGHT = 710.9
+
 
 def write_pdf(stripes, print_size, out_path):
     """Place the stripe Image objects onto the PDF
@@ -34,7 +36,7 @@ def write_pdf(stripes, print_size, out_path):
 
     for index, stripe in enumerate(stripes):
         stripe.transform_colorspace("cmyk")
-        stripe_half_width = stripe.width / 2
+        stripe_half_width = PDF_STRIPE_HEIGHT / stripe.height * stripe.width / 2
         stripe_blob = stripe.make_blob("png")
         page = pdf[math.floor(index / 2)]
 
@@ -43,31 +45,25 @@ def write_pdf(stripes, print_size, out_path):
         # The stripes are x-positioned by their center point.
         positions = {
             PRINT_SIZES["A4"]: {
-                "x": (
-                    (158.9 - stripe_half_width, 158.9 + stripe_half_width),
-                    (436.2 - stripe_half_width, 436.2 + stripe_half_width),
-                ),
-                "y": (65.5, 776.4),
+                "x": (158.9, 436.2),
+                "y": 65.5,
             },
             PRINT_SIZES["US_LETTER"]: {
-                "x": (
-                    (167.2 - stripe_half_width, 167.2 + stripe_half_width),
-                    (444.6 - stripe_half_width, 444.6 + stripe_half_width),
-                ),
-                "y": (40.5, 751.5),
+                "x": (167.2, 444.6),
+                "y": 40.5,
             },
         }
 
         rect = fitz.Rect(
-            positions[print_size]["x"][index % 2][0],
-            positions[print_size]["y"][0],
-            positions[print_size]["x"][index % 2][1],
-            positions[print_size]["y"][1],
+            positions[print_size]["x"][index % 2] - stripe_half_width,
+            positions[print_size]["y"],
+            positions[print_size]["x"][index % 2] + stripe_half_width,
+            positions[print_size]["y"] + PDF_STRIPE_HEIGHT,
         )
 
         if not page.is_wrapped:
             page.wrap_contents()
 
-        page.insert_image(rect, stream=stripe_blob)
+        page.insert_image(rect, stream=stripe_blob, keep_proportion=False)
 
     pdf.save(out_path)
