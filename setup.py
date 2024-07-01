@@ -13,10 +13,10 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "Click",
-        "colorama",
-        "PyMuPDF",
-        "wand",
+        "Click==8.1.8",
+        "colorama==0.4.6",
+        "PyMuPDF==1.23.26",
+        "wand==0.6.13",
     ],
     entry_points={
         "console_scripts": [
