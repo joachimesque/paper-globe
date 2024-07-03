@@ -3,7 +3,7 @@
 import math
 import os
 
-from fitz import fitz
+from pymupdf import pymupdf
 
 from paperglobe.config import PRINT_SIZES
 
@@ -32,7 +32,7 @@ def write_pdf(stripes, print_size, out_path):
         os.path.dirname(__file__), f"assets/template-{print_size}.pdf"
     )
 
-    pdf = fitz.open(pdf_path)
+    pdf = pymupdf.open(pdf_path)
 
     for index, stripe in enumerate(stripes):
         stripe.transform_colorspace("cmyk")
@@ -54,7 +54,7 @@ def write_pdf(stripes, print_size, out_path):
             },
         }
 
-        rect = fitz.Rect(
+        rect = pymupdf.Rect(
             positions[print_size]["x"][index % 2] - stripe_half_width,
             positions[print_size]["y"],
             positions[print_size]["x"][index % 2] + stripe_half_width,
